@@ -9,20 +9,29 @@ import {
 
 type ModalProps = {
   word: string
+  showModal: boolean
   isSuccess: boolean
 }
 
-export default function Modal({ word, isSuccess }: ModalProps) {
+export default function Modal({ word, showModal, isSuccess }: ModalProps) {
   return (
     <>
-      <Dialog>
+      <Dialog open={showModal} modal={true}>
         <DialogTrigger>Open</DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogTitle>
+              {isSuccess ? <span>Congratulations!</span> : <span>Unlucky!</span>}
+            </DialogTitle>
             <DialogDescription>
-              This action cannot be undone. This will permanently delete your account and remove
-              your data from our servers.
+              {isSuccess ? (
+                <span>You have successfully guessed the word</span>
+              ) : (
+                <span>
+                  The correct word is{' '}
+                  <span className=" font-bold size-10">{word.toUpperCase()}</span>
+                </span>
+              )}
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

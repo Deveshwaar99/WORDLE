@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useWordle from '../hooks/useWordle'
 import Grid from '@/components/Grid'
 import Keypad from '@/components/KeyPad'
@@ -18,16 +18,17 @@ export default function WordlePage({ word }: wordlePageProps) {
     setCurrentGuess,
     keyPadColors,
   } = useWordle(word)
-  console.log({ handleKeyUp, currentTurn, isSuccess, formattedGuessesList, currentGuess })
+  const [showModal, setShowModal] = useState(false)
+  // console.log({ handleKeyUp, currentTurn, isSuccess, formattedGuessesList, currentGuess })
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp)
     if (isSuccess) {
       console.log('removed -------------------')
-      // setTimeout(() => setShowModal(true), 2000)
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyUp)
     }
     if (currentTurn > 5) {
-      // setTimeout(() => setShowModal(true), 2000)
+      setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyUp)
     }
 
@@ -48,7 +49,7 @@ export default function WordlePage({ word }: wordlePageProps) {
         setCurrentGuess={setCurrentGuess}
         keypadColors={keyPadColors}
       />
-      {/* <Modal word={word} isSuccess={isSuccess} /> */}
+      <Modal word={word} showModal={showModal} isSuccess={isSuccess} />
     </>
   )
 }
