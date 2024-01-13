@@ -6,17 +6,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Dispatch, SetStateAction } from 'react'
 
 type ModalProps = {
   word: string
   showModal: boolean
   isSuccess: boolean
+  setShowModal: Dispatch<SetStateAction<boolean>>
 }
 
-export default function Modal({ word, showModal, isSuccess }: ModalProps) {
+export default function Modal({ word, showModal, isSuccess, setShowModal }: ModalProps) {
   return (
     <>
-      <Dialog open={showModal} modal={true}>
+      <Dialog open={showModal} onOpenChange={() => setShowModal(false)}>
         <DialogTrigger>Open</DialogTrigger>
         <DialogContent>
           <DialogHeader>

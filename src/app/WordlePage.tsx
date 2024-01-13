@@ -19,11 +19,9 @@ export default function WordlePage({ word }: wordlePageProps) {
     keyPadColors,
   } = useWordle(word)
   const [showModal, setShowModal] = useState(false)
-  // console.log({ handleKeyUp, currentTurn, isSuccess, formattedGuessesList, currentGuess })
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp)
     if (isSuccess) {
-      console.log('removed -------------------')
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyUp)
     }
@@ -49,7 +47,7 @@ export default function WordlePage({ word }: wordlePageProps) {
         setCurrentGuess={setCurrentGuess}
         keypadColors={keyPadColors}
       />
-      <Modal word={word} showModal={showModal} isSuccess={isSuccess} />
+      <Modal word={word} showModal={showModal} isSuccess={isSuccess} setShowModal={setShowModal} />
     </>
   )
 }
