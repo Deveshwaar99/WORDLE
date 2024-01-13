@@ -8,6 +8,8 @@ import Modal from '@/components/Modal'
 type wordlePageProps = {
   word: string
 }
+
+let ismodalAlreadyShown = false
 export default function WordlePage({ word }: wordlePageProps) {
   const {
     handleKeyUp,
@@ -18,18 +20,21 @@ export default function WordlePage({ word }: wordlePageProps) {
     setCurrentGuess,
     keyPadColors,
   } = useWordle(word)
+
   const [showModal, setShowModal] = useState(false)
+
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp)
-    if (isSuccess) {
+    if (isSuccess && !ismodalAlreadyShown) {
+      ismodalAlreadyShown = true
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyUp)
     }
-    if (currentTurn > 5) {
+    if (currentTurn > 5 && !ismodalAlreadyShown) {
+      ismodalAlreadyShown = true
       setTimeout(() => setShowModal(true), 2000)
       window.removeEventListener('keyup', handleKeyUp)
     }
-
     return () => {
       window.removeEventListener('keyup', handleKeyUp)
     }
