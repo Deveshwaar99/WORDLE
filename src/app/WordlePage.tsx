@@ -1,16 +1,20 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
+
 import useWordle from '../hooks/useWordle'
 import Grid from '@/components/Grid'
 import Keypad from '@/components/KeyPad'
 import Modal from '@/components/Modal'
+
+//styles
+import './styles.css'
 
 type wordlePageProps = {
   word: string
 }
 
 let ismodalAlreadyShown = false
-export default function WordlePage({ word }: wordlePageProps) {
+function WordlePage({ word }: wordlePageProps) {
   const {
     handleKeyUp,
     currentTurn,
@@ -56,3 +60,5 @@ export default function WordlePage({ word }: wordlePageProps) {
     </>
   )
 }
+
+export default memo(WordlePage)
