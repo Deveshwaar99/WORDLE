@@ -3,7 +3,16 @@ body {
   font-size: 1em;
   font-family: verdana;
   margin: 0;
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark {
   background-color: #121213;
+  color: #ffffff;
 }
 h1 {
   font-size: 1.2em;
@@ -23,7 +32,6 @@ h1 {
   width: 60px;
   height: 60px;
   border: 1px solid #3a3a3c;
-  color: #f8f8f8;
   margin: 2.5px;
   text-align: center;
   line-height: 60px;

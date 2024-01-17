@@ -1,4 +1,5 @@
 import { FormattedGuess } from '@/types/types'
+import { useTheme } from './ThemeProvider'
 
 type RowProps = {
   formattedGuess?: FormattedGuess
@@ -6,9 +7,11 @@ type RowProps = {
 }
 
 export default function Row({ formattedGuess, currentGuess }: RowProps) {
+  const { theme } = useTheme()
+  const textClassName = theme === 'light' ? 'text-black' : 'text-white'
   if (formattedGuess) {
     return (
-      <div className=" row past ">
+      <div className={`${textClassName} row past `}>
         {formattedGuess.map((l, i) => (
           <div key={i} className={l.color}>
             {l.char}
@@ -22,7 +25,7 @@ export default function Row({ formattedGuess, currentGuess }: RowProps) {
     let letters = currentGuess.split('')
 
     return (
-      <div className="row current">
+      <div className={`row current ${textClassName}`}>
         {letters.map((letter, i) => (
           <div key={i} className="filled">
             {letter}

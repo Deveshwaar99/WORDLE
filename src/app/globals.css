@@ -65,11 +65,16 @@
   }
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+} */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+
+.wordFont {
+  font-family: 'Roboto Slab', serif;
 }
