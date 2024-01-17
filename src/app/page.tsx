@@ -7,12 +7,12 @@ import fetchWord from './fetchword'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export default async function Home() {
-  // const { word } = await fetchWord()
+  const { word } = await fetchWord()
   return (
     <>
       <ThemeProvider>
         <AppHeader />
-        <GamePage word="shine" />
+        <GamePage word={word} />
       </ThemeProvider>
     </>
   )
