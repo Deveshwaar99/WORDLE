@@ -1,5 +1,5 @@
 import AppHeader from '@/components/AppHeader/AppHeader'
-import WordlePage from './WordlePage'
+import WordlePage from '../pages/WordlePage'
 import fetchWord from './fetchword'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
