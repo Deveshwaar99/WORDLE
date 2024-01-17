@@ -1,6 +1,9 @@
+//components
 import AppHeader from '@/components/AppHeader/AppHeader'
-import WordlePage from '../pages/WordlePage'
+import GamePage from '@/pages/GamePage'
+//utils
 import fetchWord from './fetchword'
+//theme
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export default async function Home() {
@@ -9,7 +12,7 @@ export default async function Home() {
     <>
       <ThemeProvider>
         <AppHeader />
-        <WordlePage word="shine" />
+        <GamePage word="shine" />
       </ThemeProvider>
     </>
   )

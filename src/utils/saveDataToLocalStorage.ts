@@ -1,4 +1,4 @@
-function saveDataToLocalStorage(isSuccess: boolean, word: string) {
+export function saveDataToLocalStorage(isSuccess: boolean, word: string) {
   const today = new Date()
   const date = today.toLocaleDateString()
   const data = {

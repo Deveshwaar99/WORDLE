@@ -1,11 +1,12 @@
 'use client'
 import { useEffect, useState, memo } from 'react'
-
+//components
 import useWordle from '../hooks/useWordle'
 import Grid from '@/components/Grid'
 import Keypad from '@/components/KeyPad'
 import Modal from '@/components/Modal'
-
+//utils
+import { saveDataToLocalStorage } from '@/utils/saveDataToLocalStorage'
 //styles
 import './styles.css'
 
@@ -34,12 +35,13 @@ function WordlePage({ word }: wordlePageProps) {
         ismodalAlreadyShown = true
         setTimeout(() => setShowModal(true), 2000)
       }
+      saveDataToLocalStorage(isSuccess, word)
       window.removeEventListener('keyup', handleKeyUp)
     }
     return () => {
       window.removeEventListener('keyup', handleKeyUp)
     }
-  }, [handleKeyUp, currentTurn, isSuccess])
+  }, [handleKeyUp, currentTurn, isSuccess, word])
 
   return (
     <>
