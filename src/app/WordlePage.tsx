@@ -29,14 +29,11 @@ function WordlePage({ word }: wordlePageProps) {
 
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp)
-    if (isSuccess && !ismodalAlreadyShown) {
-      ismodalAlreadyShown = true
-      setTimeout(() => setShowModal(true), 2000)
-      window.removeEventListener('keyup', handleKeyUp)
-    }
-    if (currentTurn > 5 && !ismodalAlreadyShown) {
-      ismodalAlreadyShown = true
-      setTimeout(() => setShowModal(true), 2000)
+    if (isSuccess || currentTurn > 5) {
+      if (!ismodalAlreadyShown) {
+        ismodalAlreadyShown = true
+        setTimeout(() => setShowModal(true), 2000)
+      }
       window.removeEventListener('keyup', handleKeyUp)
     }
     return () => {
