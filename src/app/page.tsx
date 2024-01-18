@@ -1,6 +1,6 @@
 //components
 import AppHeader from '@/components/AppHeader/AppHeader'
-import GamePage from '@/pages/GamePage'
+import GamePage from '@/app/GamePage'
 //utils
 import fetchWord from './fetchword'
 //theme
