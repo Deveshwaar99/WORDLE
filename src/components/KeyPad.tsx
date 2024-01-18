@@ -42,7 +42,6 @@ export default function Keypad({ currentGuess, setCurrentGuess, keypadColors }: 
       setCurrentGuess(prev => prev + letter)
     }
   }
-  console.log(keypadColors)
 
   return (
     <div className="keypad">
