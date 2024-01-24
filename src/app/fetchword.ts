@@ -1,6 +1,7 @@
 export default async function fetchWord() {
   'use server'
   console.log('Fetch is getting called')
+
   let response = await fetch(process.env.API_URL || '', {
     method: 'GET',
     headers: {
