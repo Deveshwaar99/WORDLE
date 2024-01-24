@@ -24,8 +24,7 @@ export default function Modal({ word, showModal, isSuccess, setShowModal }: Moda
   )
 
   return (
-    <Dialog open={showModal} onOpenChange={() => setShowModal(false)}>
-      <DialogTrigger>Open</DialogTrigger>
+    <Dialog open={showModal === true} onOpenChange={() => setShowModal(false)}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
