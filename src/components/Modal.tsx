@@ -4,7 +4,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog'
 import { Dispatch, SetStateAction } from 'react'
 
@@ -13,13 +12,14 @@ type ModalProps = {
   showModal: boolean
   isSuccess: boolean
   setShowModal?: Dispatch<SetStateAction<boolean>>
+  currentStreak: number
 }
 
-export default function Modal({ word, showModal, isSuccess, setShowModal }: ModalProps) {
+export default function Modal({ word, showModal, isSuccess, currentStreak }: ModalProps) {
   const wordDescription = (
     <>
-      <span className="text-xl font-bold">{word.toUpperCase()}</span>
-      <div className="mt-2 text-gray-600">Come back tomorrow for a new word challenge! 👋</div>
+      <span className="text-xl font-bold text-gray-50">{word.toUpperCase()}</span>
+      <div className="mt-2 text-slate-200">Come back tomorrow for a new word challenge! 👋</div>
     </>
   )
 
@@ -37,17 +37,22 @@ export default function Modal({ word, showModal, isSuccess, setShowModal }: Moda
           <DialogDescription>
             {isSuccess ? (
               <>
-                <span className="text-gray-700">You have successfully guessed the word {'  '}</span>
+                <span className="mr-2 text-slate-200">You have successfully guessed the word </span>
                 {wordDescription}
               </>
             ) : (
               <>
-                <span className="text-gray-700">
+                <span className="text-slate-200">
                   Unfortunately, you did not guess the correct word this time.
                 </span>
                 {wordDescription}
               </>
             )}
+            {currentStreak ? (
+              <div className="my-2 text-base text-slate-200">
+                Current Streak <span className="text-slate-200"> {currentStreak}</span>
+              </div>
+            ) : null}
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
