@@ -1,10 +1,9 @@
 'use client'
-import { useEffect, useState, memo } from 'react'
+import { useEffect } from 'react'
 //components
-import useWordle from '../hooks/useWordle'
 import Grid from '@/components/Grid'
 import Keypad from '@/components/KeyPad'
-import Modal from '@/components/Modal'
+import useWordle from '../hooks/useWordle'
 //utils
 import { saveDataToLocalStorage } from '@/utils/saveDataToLocalStorage'
 //styles
@@ -12,10 +11,10 @@ import './styles.css'
 
 type wordlePageProps = {
   word: string
+  currentStreak: number
 }
 
-let ismodalAlreadyShown = false
-function WordlePage({ word }: wordlePageProps) {
+function WordlePage({ word, currentStreak }: wordlePageProps) {
   const {
     handleKeyUp,
     currentTurn,
@@ -26,22 +25,23 @@ function WordlePage({ word }: wordlePageProps) {
     keyPadColors,
   } = useWordle(word)
 
-  const [showModal, setShowModal] = useState(false)
-
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp)
-    if (isSuccess || currentTurn > 5) {
-      if (!ismodalAlreadyShown) {
-        ismodalAlreadyShown = true
-        setTimeout(() => setShowModal(true), 2000)
-      }
-      saveDataToLocalStorage(isSuccess, word)
-      window.removeEventListener('keyup', handleKeyUp)
+
+    async function handleLocalStorage() {
+      await saveDataToLocalStorage({ isSuccess, word, streak: isSuccess ? ++currentStreak : 0 })
     }
+
+    if (isSuccess || currentTurn > 5) {
+      handleLocalStorage()
+      window.removeEventListener('keyup', handleKeyUp)
+      setTimeout(() => window.location.reload(), 3000)
+    }
+
     return () => {
       window.removeEventListener('keyup', handleKeyUp)
     }
-  }, [handleKeyUp, currentTurn, isSuccess, word])
+  }, [handleKeyUp, currentTurn, isSuccess, word, currentStreak])
 
   return (
     <>
@@ -55,9 +55,10 @@ function WordlePage({ word }: wordlePageProps) {
         setCurrentGuess={setCurrentGuess}
         keypadColors={keyPadColors}
       />
-      <Modal word={word} showModal={showModal} isSuccess={isSuccess} setShowModal={setShowModal} />
+      {/* <Modal word={word} showModal={showModal} isSuccess={isSuccess} setShowModal={setShowModal} /> */}
     </>
   )
 }
 
-export default memo(WordlePage)
+// export default memo(WordlePage)
+export default WordlePage
