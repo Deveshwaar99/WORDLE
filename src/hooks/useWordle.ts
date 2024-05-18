@@ -1,6 +1,7 @@
 import { useCallback, useState, useRef } from 'react'
 import { FormattedGuess } from '@/types/types'
 import addColorstoKeyboard from '@/utils/addColors'
+import { validateWord } from '@/utils/validateWord'
 
 export default function useWordle(word: string) {
   // const currentTurnRef = useRef(0)
@@ -54,15 +55,22 @@ export default function useWordle(word: string) {
     setCurrentGuess('')
   }
 
-  function handleKeyUp(e: KeyboardEvent) {
+  async function handleKeyUp(e: KeyboardEvent) {
     //validate enter key
     if (e.key === 'Enter') {
       if (
         currentGuess.length !== 5 ||
         currentTurn > 5 ||
         wordHistoryRef.current.includes(currentGuess)
-      )
+      ) {
         return
+      }
+      //Check whether its a  valid english word
+      const isValidWord = await validateWord(currentGuess)
+      if (!isValidWord) {
+        return
+      }
+
       //Its a valid input - can submit the guess
       const validatedGuess = formatGuess()
       addGuess(validatedGuess)
