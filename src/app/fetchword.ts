@@ -1,18 +1,14 @@
-export default async function fetchWord() {
-  'use server'
-  console.log('Fetch is getting called')
+'use server'
 
-  let response = await fetch(process.env.API_URL || '', {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': process.env.API_URL_KEY || '',
-      'X-RapidAPI-Host': process.env.API_URL_HOST || '',
-    },
-    next: { revalidate: 3600 * 24 },
+export async function fetchWord() {
+  let response = await fetch(`${process.env.WORD_GET_ENDPOINT}`, {
+    next: { revalidate: 15 * 60 }, //revalidate every 15 mins
   })
+
   if (response.ok) {
     let { word } = await response.json()
-    return { status: 'success', word }
+
+    return { word } as { word: string }
   } else {
     throw new Error('Failed to fetch data')
   }
