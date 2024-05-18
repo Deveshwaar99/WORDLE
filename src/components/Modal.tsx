@@ -12,19 +12,19 @@ type ModalProps = {
   word: string
   showModal: boolean
   isSuccess: boolean
-  setShowModal: Dispatch<SetStateAction<boolean>>
+  setShowModal?: Dispatch<SetStateAction<boolean>>
 }
 
 export default function Modal({ word, showModal, isSuccess, setShowModal }: ModalProps) {
   const wordDescription = (
     <>
-      <span className="font-bold text-xl">{word.toUpperCase()}</span>
-      <div className="text-gray-600 mt-2">Come back tomorrow for a new word challenge! 👋</div>
+      <span className="text-xl font-bold">{word.toUpperCase()}</span>
+      <div className="mt-2 text-gray-600">Come back tomorrow for a new word challenge! 👋</div>
     </>
   )
 
   return (
-    <Dialog open={showModal === true} onOpenChange={() => setShowModal(false)}>
+    <Dialog open={showModal === true}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
@@ -37,7 +37,7 @@ export default function Modal({ word, showModal, isSuccess, setShowModal }: Moda
           <DialogDescription>
             {isSuccess ? (
               <>
-                <span className="text-gray-700">You have successfully guessed the word </span>
+                <span className="text-gray-700">You have successfully guessed the word {'  '}</span>
                 {wordDescription}
               </>
             ) : (
