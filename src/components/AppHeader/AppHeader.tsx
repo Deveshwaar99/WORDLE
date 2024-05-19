@@ -1,20 +1,29 @@
 'use client'
+
 import { Switch } from '@/components/ui/switch'
 import './fontStyles.css'
 import { useTheme } from '../ThemeProvider'
+import { Moon, MoonIcon, Sun } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function AppHeader() {
   const { theme, toggleTheme } = useTheme()
 
-  const textClassName = theme === 'light' ? 'text-black' : 'text-white'
+  let Icon = theme === 'light' ? Sun : Moon
 
   return (
-    <header className="flex mx-auto justify-between items-center">
-      <div className="mx-8"></div>
-      <h1 className={`text-center flex-grow text-4xl heading  ${textClassName}`}>MyWordle</h1>
-      <div className="mx-4 ">
-        <Switch defaultChecked onCheckedChange={toggleTheme} />
+    <div className="mx-auto my-4 flex w-[300px] items-center justify-between">
+      <div
+        className={cn(
+          ' text-4xl text-center flex-1   ',
+          theme === 'light' ? 'text-black' : 'text-white'
+        )}
+      >
+        MyWordle
       </div>
-    </header>
+      <button onClick={toggleTheme}>
+        <Icon fill="yellow" size={32} />
+      </button>
+    </div>
   )
 }
