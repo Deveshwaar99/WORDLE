@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
 import { Dispatch, SetStateAction } from 'react'
 
 type ModalProps = {
@@ -16,45 +17,39 @@ type ModalProps = {
 }
 
 export default function Modal({ word, showModal, isSuccess, currentStreak }: ModalProps) {
-  const wordDescription = (
-    <>
-      <span className="text-xl font-bold text-gray-50">{word.toUpperCase()}</span>
-      <div className="mt-2 text-slate-200">Come back tomorrow for a new word challenge! 👋</div>
-    </>
-  )
-
   return (
-    <Dialog open={showModal === true}>
-      <DialogContent>
+    <Dialog open={showModal}>
+      <DialogContent className="max-[460px] w-full rounded-lg bg-gray-900 p-8">
         <DialogHeader>
           <DialogTitle>
-            {isSuccess ? (
-              <span className="text-green-500">Congratulations!</span>
-            ) : (
-              <span className="text-red-500">Unlucky!</span>
-            )}
+            <div
+              className={cn(
+                'text-center text-3xl font-bold',
+                isSuccess ? 'text-emerald-400' : 'text-rose-500'
+              )}
+            >
+              {isSuccess ? 'Congratulations!' : 'Unlucky!'}
+            </div>
           </DialogTitle>
-          <DialogDescription>
-            {isSuccess ? (
-              <>
-                <span className="mr-2 text-slate-200">You have successfully guessed the word </span>
-                {wordDescription}
-              </>
-            ) : (
-              <>
-                <span className="text-slate-200">
-                  Unfortunately, you did not guess the correct word this time.
-                </span>
-                {wordDescription}
-              </>
-            )}
-            {currentStreak ? (
-              <div className="my-2 text-base text-slate-200">
-                Current Streak <span className="text-slate-200"> {currentStreak}</span>
-              </div>
-            ) : null}
-          </DialogDescription>
         </DialogHeader>
+        <DialogDescription>
+          <div className="mt-8 text-center text-gray-200">
+            <span className="block text-4xl font-bold text-white">{word.toUpperCase()}</span>
+            {currentStreak > 0 && (
+              <div className="mt-6 rounded-lg bg-gray-800 px-4 py-2 text-center text-sm text-gray-300">
+                Current Streak: <span className="font-bold text-white">{currentStreak}</span>
+              </div>
+            )}
+          </div>
+          <div className="mt-8 text-gray-400">
+            <span>
+              {isSuccess
+                ? 'You have successfully guessed the word'
+                : 'Unfortunately, you did not guess the correct word this time.'}
+            </span>
+            <div className="mt-2">Come back tomorrow for a new word challenge! 👋</div>
+          </div>
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   )
