@@ -102,5 +102,6 @@ export default function useWordle(word: string) {
     currentGuess,
     setCurrentGuess,
     keyPadColors,
+    handleEnterKey,
   }
 }
