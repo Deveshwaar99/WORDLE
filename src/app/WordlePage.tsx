@@ -23,6 +23,7 @@ function WordlePage({ word, currentStreak }: wordlePageProps) {
     currentGuess,
     setCurrentGuess,
     keyPadColors,
+    handleEnterKey,
   } = useWordle(word)
 
   useEffect(() => {
@@ -54,8 +55,8 @@ function WordlePage({ word, currentStreak }: wordlePageProps) {
         currentGuess={currentGuess}
         setCurrentGuess={setCurrentGuess}
         keypadColors={keyPadColors}
+        handleEnterKey={handleEnterKey}
       />
-      {/* <Modal word={word} showModal={showModal} isSuccess={isSuccess} setShowModal={setShowModal} /> */}
     </>
   )
 }
