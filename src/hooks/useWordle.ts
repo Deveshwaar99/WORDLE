@@ -16,10 +16,9 @@ export default function useWordle(word: string) {
   function formatGuess() {
     const formattedGuess: FormattedGuess = []
     let wordCopy = word.split('')
-
     //set grey to all chars
     currentGuess.split('').forEach((letter, index) => {
-      formattedGuess[index] = { char: letter, color: 'grey' }
+      formattedGuess[index] = { char: letter.toLocaleLowerCase(), color: 'grey' }
     })
 
     //Match correct position chars & set green  & remove the char to avoid further matches
