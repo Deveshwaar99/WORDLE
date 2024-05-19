@@ -55,25 +55,28 @@ export default function useWordle(word: string) {
     setCurrentGuess('')
   }
 
+  async function handleEnterKey() {
+    if (
+      currentGuess.length !== 5 ||
+      currentTurn > 5 ||
+      wordHistoryRef.current.includes(currentGuess)
+    ) {
+      return
+    }
+    //Check whether its a  valid english word
+    const isValidWord = await validateWord(currentGuess)
+    if (!isValidWord) {
+      return
+    }
+    //Its a valid input - can submit the guess
+    const validatedGuess = formatGuess()
+    addGuess(validatedGuess)
+  }
+
   async function handleKeyUp(e: KeyboardEvent) {
     //validate enter key
     if (e.key === 'Enter') {
-      if (
-        currentGuess.length !== 5 ||
-        currentTurn > 5 ||
-        wordHistoryRef.current.includes(currentGuess)
-      ) {
-        return
-      }
-      //Check whether its a  valid english word
-      const isValidWord = await validateWord(currentGuess)
-      if (!isValidWord) {
-        return
-      }
-
-      //Its a valid input - can submit the guess
-      const validatedGuess = formatGuess()
-      addGuess(validatedGuess)
+      await handleEnterKey()
     }
 
     //validate letter keys
