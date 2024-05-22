@@ -7,12 +7,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 type GamePageProps = {
   word: string
 }
-let count = 0
+
 export default function GamePage({ word }: GamePageProps) {
   const currentStreakRef = useRef(0)
   const successStateRef = useRef(false)
   const [showModal, setShowModal] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function getLocalStorageValues() {
