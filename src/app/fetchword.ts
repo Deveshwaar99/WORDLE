@@ -1,9 +1,10 @@
 'use server'
 
 export async function fetchWord() {
-  let response = await fetch(`${process.env.WORD_GET_ENDPOINT}`, {
-    next: { revalidate: 15 * 60 }, //revalidate every 15 mins
-  })
+  let response = await fetch(
+    `${process.env.WORD_GET_ENDPOINT}`,
+    { cache: 'no-store' } //No caching
+  )
 
   if (response.ok) {
     let { word } = await response.json()
