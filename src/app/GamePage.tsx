@@ -3,12 +3,24 @@
 import WordlePage from '@/app/WordlePage'
 import Modal from '@/components/Modal'
 import { getDataFromLocalStorage } from '@/utils/getDataFromLocalStorage'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+function getTimeDifferenceFromToday(lastplayedDate: Date) {
+  const lastplayedDateTime = lastplayedDate.getTime()
+  const today = new Date().getTime()
+
+  const timeDiff = (today - lastplayedDateTime) / (1000 * 60 * 60)
+
+  return timeDiff
+}
+
 type GamePageProps = {
   word: string
 }
 
 export default function GamePage({ word }: GamePageProps) {
+  const [currentStreak, setCurrentStreak] = useState(0)
+  const [successState, setSuccessState] = useState(false)
   const currentStreakRef = useRef(0)
   const successStateRef = useRef(false)
   const [showModal, setShowModal] = useState(false)
@@ -17,11 +29,17 @@ export default function GamePage({ word }: GamePageProps) {
     async function getLocalStorageValues() {
       const storageValues = await getDataFromLocalStorage()
       if (!storageValues) return
-      const today = new Date().toLocaleDateString()
+      setCurrentStreak(storageValues.streak)
+      setSuccessState(storageValues.isSuccess)
 
-      if (storageValues.date === today && storageValues.word === word) {
-        currentStreakRef.current = storageValues.streak
-        successStateRef.current = storageValues.isSuccess
+      const lastPlayedDate = new Date(storageValues.date)
+      const hoursSinceLastPlayed = getTimeDifferenceFromToday(lastPlayedDate)
+
+      if (hoursSinceLastPlayed > 24) {
+        setCurrentStreak(0)
+      }
+
+      if (storageValues.word === word) {
         setShowModal(true)
       }
     }
