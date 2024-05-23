@@ -21,8 +21,7 @@ type GamePageProps = {
 export default function GamePage({ word }: GamePageProps) {
   const [currentStreak, setCurrentStreak] = useState(0)
   const [successState, setSuccessState] = useState(false)
-  const currentStreakRef = useRef(0)
-  const successStateRef = useRef(false)
+
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
@@ -47,15 +46,8 @@ export default function GamePage({ word }: GamePageProps) {
   }, [word])
 
   if (showModal) {
-    return (
-      <Modal
-        word={word}
-        isSuccess={successStateRef.current}
-        showModal
-        currentStreak={currentStreakRef.current}
-      />
-    )
+    return <Modal word={word} isSuccess={successState} showModal currentStreak={currentStreak} />
   }
 
-  return <WordlePage word={word} currentStreak={currentStreakRef.current} />
+  return <WordlePage word={word} currentStreak={currentStreak} />
 }
