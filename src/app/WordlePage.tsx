@@ -31,12 +31,12 @@ function WordlePage({ word, currentStreak }: wordlePageProps) {
 
     async function handleLocalStorage() {
       await saveDataToLocalStorage({ isSuccess, word, streak: isSuccess ? ++currentStreak : 0 })
+      setTimeout(() => window.location.reload(), 1500)
     }
 
     if (isSuccess || currentTurn > 5) {
       handleLocalStorage()
       window.removeEventListener('keyup', handleKeyUp)
-      setTimeout(() => window.location.reload(), 3000)
     }
 
     return () => {
