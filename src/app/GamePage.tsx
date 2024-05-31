@@ -3,7 +3,7 @@
 import WordlePage from '@/app/WordlePage'
 import Modal from '@/components/Modal'
 import { getDataFromLocalStorage } from '@/utils/getDataFromLocalStorage'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function getTimeDifferenceFromToday(lastplayedDate: Date) {
   const lastplayedDateTime = lastplayedDate.getTime()
