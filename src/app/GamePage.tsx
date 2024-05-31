@@ -34,7 +34,7 @@ export default function GamePage({ word }: GamePageProps) {
       const lastPlayedDate = new Date(storageValues.date)
       const hoursSinceLastPlayed = getTimeDifferenceFromToday(lastPlayedDate)
 
-      if (hoursSinceLastPlayed > 24) {
+      if (hoursSinceLastPlayed > 48) {
         setCurrentStreak(0)
       }
 
