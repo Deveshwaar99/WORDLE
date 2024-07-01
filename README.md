@@ -8,6 +8,15 @@
 
 [https://wordle-six-topaz.vercel.app/](https://wordle-six-topaz.vercel.app/)
 
+<h2>🧐 Features</h2>
+
+*  Custom API endpoint built with Hono on Cloudflare Workers for daily word generation
+*  Responsive and accessible UI designed with Tailwind CSS and Radix UI
+*  Built with Next.js and React for optimal performance
+*  Daily challenge with a new word each day
+
+
+
 <h2>🛠️ Installation Steps:</h2>
 
 <p>1. Clone the repo</p>
@@ -42,7 +51,10 @@ npm start
 
 Technologies used in the project:
 
-*   Nodejs
-*   tailwind
-*   rapidApi
-*   radixUI
+*  Next.js
+*  React
+*  TypeScript
+*  Tailwind CSS
+*  Hono
+*  Cloudflare Workers
+*  Radix UI
